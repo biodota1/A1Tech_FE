@@ -11,6 +11,7 @@ import AdminHome from "./Features/Users/Admin/AdminHome";
 import UsersList from "./Features/Users/Admin/Users/UsersList";
 import ProductsList from "./Features/Users/Admin/Products/ProductsList";
 import PersistLogin from "./Features/Auth/PersistLogin";
+import Test from "./Test/Text";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: () => <Home />,
+      },
+      {
+        path: "test",
+        element: <Test/>,
       },
       {
         path: "login",
