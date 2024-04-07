@@ -9,9 +9,10 @@ import UserDashboard from "./Features/Users/UserDashboard";
 import Prefetch from "./Features/Auth/Prefetch";
 import AdminHome from "./Features/Users/Admin/AdminHome";
 import UsersList from "./Features/Users/Admin/Users/UsersList";
-import ProductsList from "./Features/Users/Admin/Products/ProductsList";
+import ProductsList from "./Features/Users/Admin/AdminProducts/ProductsList";
 import PersistLogin from "./Features/Auth/PersistLogin";
 import Test from "./Test/Text";
+import AdminProductsLayout from "./Features/Users/Admin/AdminProducts/AdminProductsLayout";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
       },
       {
         path: "test",
-        element: <Test/>,
+        element: <Test />,
       },
       {
         path: "login",
@@ -47,7 +48,7 @@ const router = createBrowserRouter([
                   },
                   {
                     path: "products",
-                    element: <ProductsList />,
+                    element: <AdminProductsLayout />,
                   },
                 ],
               },

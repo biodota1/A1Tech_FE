@@ -12,6 +12,9 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const [passErrMsg, setPassErrMsg] = useState("");
+  const [userInputErr, setUserInputErr] = useState(false);
+  const [passInputErr, setPassInputErr] = useState(false);
   const [persist, setPersist] = usePersist();
 
   const navigate = useNavigate();
@@ -25,6 +28,9 @@ const Login = () => {
 
   useEffect(() => {
     setErrMsg("");
+    setPassErrMsg("");
+    setUserInputErr(false);
+    setPassInputErr(false);
   }, [username, password]);
 
   const handleSubmit = async (e) => {
@@ -43,9 +49,11 @@ const Login = () => {
       if (!err.status) {
         setErrMsg("No Server Response");
       } else if (err.status === 400) {
-        setErrMsg("Missing Username or Password");
+        setPassErrMsg("The password you've entered is incorrect.");
+        setPassInputErr(true);
       } else if (err.status === 401) {
-        setErrMsg("Unauthorized");
+        setErrMsg("The username you entered doesn't exist.");
+        setUserInputErr(true);
       } else {
         setErrMsg(err.data?.message);
       }
@@ -66,7 +74,11 @@ const Login = () => {
       <div className="w-[800px] min-h-[100vh] mx-auto bg-slate-200 px-[160px] py-10 flex flex-col gap-5">
         <h1 className="text-center p-10 text-4xl font-bold">Login</h1>
         <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
-          <label className="input input-bordered flex items-center gap-2 bg-white">
+          <label
+            className={`input input-bordered flex items-center gap-2 bg-white ${
+              userInputErr ? "input-error" : ""
+            }`}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -83,10 +95,14 @@ const Login = () => {
               value={username}
               onChange={handleUserInput}
               autoComplete="off"
-              required
             />
           </label>
-          <label className="input input-bordered flex items-center gap-2 bg-white">
+          <p className="text-rose-400 font-bold">{errMsg}</p>
+          <label
+            className={`input input-bordered flex items-center gap-2 bg-white ${
+              passInputErr ? "input-error" : ""
+            }`}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -104,9 +120,9 @@ const Login = () => {
               className="grow"
               value={password}
               onChange={handlePwdInput}
-              required
             />
           </label>
+          <p className="text-rose-400 font-bold">{passErrMsg}</p>
           <div className="form-control">
             <label className="label cursor-pointer">
               <span className="label-text text-black font-semibold text-lg">

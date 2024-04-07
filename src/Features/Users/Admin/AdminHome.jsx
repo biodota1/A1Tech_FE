@@ -1,6 +1,6 @@
 import React from "react";
 import { useGetUsersQuery } from "./UserApiSlice";
-import { useGetProductsQuery } from "./Products/ProductApiSlice";
+import { useGetProductsQuery } from "./AdminProducts/ProductApiSlice";
 
 export default function AdminHome() {
   const {

@@ -1,5 +1,5 @@
 import { store } from "../../App/Store";
-import { productsApiSlice } from "../Users/Admin/Products/ProductApiSlice";
+import { productsApiSlice } from "../Users/Admin/AdminProducts/ProductApiSlice";
 import { usersApiSlice } from "../Users/Admin/UserApiSlice";
 
 import { useEffect } from "react";
