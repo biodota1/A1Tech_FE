@@ -1,10 +1,14 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import UsersList from "./UsersList";
+import useAuth from "../../../../Hooks/UseAuth";
 
 export default function UserListLayout() {
+  const { status } = useAuth();
+
   return (
-    <>
-      <Outlet />
-    </>
+    <div>
+      {status && status === "Admin" ? <UsersList /> : <Navigate to="/dash" />}
+    </div>
   );
 }

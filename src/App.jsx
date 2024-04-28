@@ -11,8 +11,12 @@ import AdminHome from "./Features/Users/Admin/AdminHome";
 import UsersList from "./Features/Users/Admin/Users/UsersList";
 import ProductsList from "./Features/Users/Admin/AdminProducts/ProductsList";
 import PersistLogin from "./Features/Auth/PersistLogin";
-import Test from "./Test/Text";
 import AdminProductsLayout from "./Features/Users/Admin/AdminProducts/AdminProductsLayout";
+import AdminDashboard from "./Features/Users/Admin/AdminDashboard";
+import MemberDashBoard from "./Features/Users/Member/MemberDashboard";
+import UserListLayout from "./Features/Users/Admin/Users/UserListLayout";
+import MemberHome from "./Features/Users/Member/MemberHome";
+import MemberProductsLayout from "./Features/Users/Member/MemberProducts/MemberProductsLayout";
 
 const router = createBrowserRouter([
   {
@@ -23,10 +27,7 @@ const router = createBrowserRouter([
         index: true,
         Component: () => <Home />,
       },
-      {
-        path: "test",
-        element: <Test />,
-      },
+
       {
         path: "login",
         element: <Login />,
@@ -41,14 +42,28 @@ const router = createBrowserRouter([
                 path: "dash",
                 element: <UserDashboard />,
                 children: [
-                  { index: true, Component: () => <AdminHome /> },
                   {
-                    path: "users",
-                    element: <UsersList />,
+                    path: "admin",
+                    element: <AdminDashboard />,
+                    children: [
+                      { index: true, Component: () => <AdminHome /> },
+                      { path: "users", element: <UserListLayout /> },
+                      {
+                        path: "products",
+                        element: <AdminProductsLayout />,
+                        children: [
+                          { index: true, Component: () => <ProductsList /> },
+                        ],
+                      },
+                    ],
                   },
                   {
-                    path: "products",
-                    element: <AdminProductsLayout />,
+                    path: "member",
+                    element: <MemberDashBoard />,
+                    children: [
+                      { index: true, Component: () => <MemberHome /> },
+                      { path: "products", element: <MemberProductsLayout /> },
+                    ],
                   },
                 ],
               },
