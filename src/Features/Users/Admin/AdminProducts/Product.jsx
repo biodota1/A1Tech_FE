@@ -6,11 +6,12 @@ import {
 } from "./ProductApiSlice";
 import { useState, useEffect } from "react";
 
-const Product = ({ productId }) => {
+const Product = ({ productId, selected }) => {
   const product = useSelector((state) => selectProductById(state, productId));
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState(0);
+  const [isSelected, setIsSelected] = useState(false);
 
   const [deleteProduct] = useDeleteProductMutation();
 
@@ -20,7 +21,17 @@ const Product = ({ productId }) => {
     setName("");
     setCategory("");
     setCategory(0);
-  }, []);
+
+    if (selected) {
+      setIsSelected(true);
+    } else {
+      setIsSelected(false);
+    }
+  }, [selected]);
+
+  const handleIsSelected = () => {
+    setIsSelected(!isSelected);
+  };
 
   const handleNameInput = (e) => setName(e.target.value);
   const handleCategoryInput = (e) => setCategory(e.target.value);
@@ -58,7 +69,12 @@ const Product = ({ productId }) => {
       <tr>
         <th>
           <label>
-            <input type="checkbox" className="checkbox" />
+            <input
+              type="checkbox"
+              className="checkbox border-black"
+              checked={isSelected}
+              onChange={handleIsSelected}
+            />
           </label>
         </th>
         <td>
@@ -71,11 +87,12 @@ const Product = ({ productId }) => {
                 />
               </div>
             </div>
-
-            <div>
-              <div className="font-bold">{product.name}</div>
-              <div className="text-sm opacity-50">{product.id}</div>
-            </div>
+          </div>
+        </td>
+        <td>
+          <div>
+            <div className="font-bold">{product.name}</div>
+            <div className="text-sm opacity-50">{product.id}</div>
           </div>
         </td>
         <td>{product.category}</td>

@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { setCredentials } from "./AuthSlice";
 import { useLoginMutation } from "./AuthApiSlice";
 import usePersist from "../../Hooks/UsePersist";
+import { useAddNewHistoryMutation } from "../Users/Admin/History/HistoryApiSlice";
 
 const Login = () => {
   const userRef = useRef();
@@ -21,6 +22,9 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const [login, { isLoading }] = useLoginMutation();
+  const [addNewHistory, { isError }] = useAddNewHistoryMutation();
+
+  let success;
 
   useEffect(() => {
     userRef.current.focus();
@@ -42,6 +46,13 @@ const Login = () => {
         password,
       }).unwrap();
       dispatch(setCredentials({ accessToken }));
+      await addNewHistory({
+        action: "User_Login",
+        actor: username,
+        details: "User",
+        result: "Success",
+      });
+
       setUsername("");
       setPassword("");
       navigate("/dash");

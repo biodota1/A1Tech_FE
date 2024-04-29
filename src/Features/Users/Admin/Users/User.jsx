@@ -9,7 +9,7 @@ const User = ({ userId }) => {
       <tr>
         <th>
           <label>
-            <input type="checkbox" className="checkbox" />
+            <input type="checkbox" className="checkbox border-black" />
           </label>
         </th>
         <td>
@@ -22,10 +22,12 @@ const User = ({ userId }) => {
                 />
               </div>
             </div>
-            <div>
-              <div className="font-bold">{user.username}</div>
-              <div className="text-sm opacity-50">nickname</div>
-            </div>
+          </div>
+        </td>
+        <td>
+          <div>
+            <div className="font-bold">{user.username}</div>
+            <div className="text-sm opacity-50">nickname</div>
           </div>
         </td>
         <td>{user.email}</td>

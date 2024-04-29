@@ -1,90 +1,32 @@
 import React from "react";
-import { useGetUsersQuery } from "./UserApiSlice";
-import { useGetProductsQuery } from "./AdminProducts/ProductApiSlice";
+
+import RecentAddedProducts from "./RecentAddedProducts";
+import UsersWidget from "./UsersWidget";
+import ProductWidget from "./ProductWidget";
+import VisitorWidget from "./VisitorWidget";
+import OrderWidget from "./OrderWidget";
+import ActiveUsersList from "./ActiveUsersList";
+import Order from "./Order";
+import OrderList from "./OrderList";
 
 export default function AdminHome() {
-  const {
-    data: users,
-    isLoading,
-    isSuccess,
-    isError,
-    error,
-  } = useGetUsersQuery(undefined, {
-    pollingInterval: 6000,
-    refetchOnFocus: true,
-    refetchOnMountOrArgChange: true,
-  });
-
-  let numOfUsers;
-
-  if (isSuccess) {
-    const { ids } = users;
-    numOfUsers = ids.length;
-  }
-
   return (
-    <div className="stats bg-slate-100 text-slate-800">
-      <div className="stat">
-        <div className="stat-figure text-secondary">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            className="inline-block w-8 h-8 stroke-current"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            ></path>
-          </svg>
+    <div className=" bg-slate-200 text-slate-800">
+      <h1 className="mt-5 text-2xl font-bold">Dashboard</h1>
+      <div className="flex gap-6 mt-8">
+        <div className="grid gap-6">
+          <UsersWidget />
+          <ProductWidget />
+          <VisitorWidget />
+          <OrderWidget />
         </div>
-        <div className="stat-title">Downloads</div>
-        <div className="stat-value">31K</div>
-        <div className="stat-desc">Jan 1st - Feb 1st</div>
+        <RecentAddedProducts />
       </div>
-
-      <div className="stat ">
-        <div className="stat-figure text-secondary">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            className="inline-block w-8 h-8 stroke-current"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-            ></path>
-          </svg>
-        </div>
-        <div className="stat-title">Number of Users</div>
-        <div className="stat-value text-center">{numOfUsers}</div>
-        <div className="stat-desc">↗︎ 400 (22%)</div>
+      <div className="mt-6 w-[825px] rounded-r-lg">
+        <ActiveUsersList />
       </div>
-
-      <div className="stat">
-        <div className="stat-figure text-secondary">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            className="inline-block w-8 h-8 stroke-current"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
-            ></path>
-          </svg>
-        </div>
-        <div className="stat-title">New Registers</div>
-        <div className="stat-value">4000</div>
-        <div className="stat-desc">↘︎ 90 (14%)</div>
+      <div className="mt-6 w-[825px] rounded-r-lg">
+        <OrderList />
       </div>
     </div>
   );

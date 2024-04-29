@@ -3,12 +3,15 @@ import { Navigate } from "react-router-dom";
 import UsersList from "./UsersList";
 import useAuth from "../../../../Hooks/UseAuth";
 
-export default function UserListLayout() {
+const UserListLayout = () => {
   const { status } = useAuth();
 
   return (
-    <div>
-      {status && status === "Admin" ? <UsersList /> : <Navigate to="/dash" />}
+    <div className="">
+      <h1 className="mt-5 text-2xl font-bold">Users</h1>
+      <UsersList />
     </div>
   );
-}
+};
+
+export default UserListLayout;

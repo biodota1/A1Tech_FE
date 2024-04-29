@@ -23,7 +23,7 @@ export default function MemberDashBoard() {
   if (isError) return <p>Error: {error.data?.message}</p>;
   return (
     <div className="min-h-[100vh] flex">
-      <div className="min-w-[300px] flex flex-col bg-slate-800 text-white">
+      <div className="min-w-[250px] flex flex-col bg-slate-800 text-white">
         <Link to="/dash" className="text-xl m-6 ml-10 text-primary text-center">
           MEMBER
         </Link>

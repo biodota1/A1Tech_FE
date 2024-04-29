@@ -1,5 +1,6 @@
 import { store } from "../../App/Store";
 import { productsApiSlice } from "../Users/Admin/AdminProducts/ProductApiSlice";
+import { historyApiSlice } from "../Users/Admin/History/HistoryApiSlice";
 import { usersApiSlice } from "../Users/Admin/UserApiSlice";
 
 import { useEffect } from "react";
@@ -13,10 +14,15 @@ const Prefetch = () => {
     );
     const users = store.dispatch(usersApiSlice.endpoints.getUsers.initiate());
 
+    const history = store.dispatch(
+      historyApiSlice.endpoints.getHistory.initiate()
+    );
+
     return () => {
       console.log("unsubscribing");
       products.unsubscribe();
       users.unsubscribe();
+      history.unsubscribe();
     };
   }, []);
 

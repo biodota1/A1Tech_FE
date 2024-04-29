@@ -1,6 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Home/Home";
-import Products from "./Products/Products";
 import Product from "./Product/Product";
 import PublicLayout from "./Components/PublicLayout";
 import Login from "./Features/Auth/Login";
@@ -17,6 +16,11 @@ import MemberDashBoard from "./Features/Users/Member/MemberDashboard";
 import UserListLayout from "./Features/Users/Admin/Users/UserListLayout";
 import MemberHome from "./Features/Users/Member/MemberHome";
 import MemberProductsLayout from "./Features/Users/Member/MemberProducts/MemberProductsLayout";
+import Dashboard from "./Features/Dashboard/Dashboard";
+import DashHome from "./Features/Dashboard/DashHome";
+import Users from "./Features/Dashboard/Users";
+import Products from "./Features/Dashboard/Products";
+import Histories from "./Features/Dashboard/Histories";
 
 const router = createBrowserRouter([
   {
@@ -40,31 +44,12 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "dash",
-                element: <UserDashboard />,
+                element: <Dashboard />,
                 children: [
-                  {
-                    path: "admin",
-                    element: <AdminDashboard />,
-                    children: [
-                      { index: true, Component: () => <AdminHome /> },
-                      { path: "users", element: <UserListLayout /> },
-                      {
-                        path: "products",
-                        element: <AdminProductsLayout />,
-                        children: [
-                          { index: true, Component: () => <ProductsList /> },
-                        ],
-                      },
-                    ],
-                  },
-                  {
-                    path: "member",
-                    element: <MemberDashBoard />,
-                    children: [
-                      { index: true, Component: () => <MemberHome /> },
-                      { path: "products", element: <MemberProductsLayout /> },
-                    ],
-                  },
+                  { index: true, Component: () => <DashHome /> },
+                  { path: "users", element: <Users /> },
+                  { path: "products", element: <Products /> },
+                  { path: "history", element: <Histories /> },
                 ],
               },
             ],

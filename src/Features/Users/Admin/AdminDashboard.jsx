@@ -24,29 +24,49 @@ export default function AdminDashboard() {
   if (isError) return <p>Error: {error.data?.message}</p>;
 
   return (
-    <div className="min-h-[100vh] flex">
-      <div className="bg-slate-300 min-w-[300px] flex flex-col">
-        <Link to="/dash" className="text-xl m-6 ml-10">
+    <div className="min-h-[100vh] flex bg-slate-200">
+      <div className="bg-slate-800 min-w-[250px] flex flex-col text-green-400">
+        <Link
+          to="/dash"
+          className="text-xl font-bold h-[100px] w-full pt-8 pl-16"
+        >
           ADMIN
         </Link>
-        <div className="h-15">s</div>
-        <Link to="users/" className="btn btn-primary rounded-none text-xl">
-          Users
+        <Link
+          to="/dash"
+          className="btn bg-slate-800 rounded-none  text-white border-none"
+        >
+          <p className="text-xl w-full text-justify pl-[50px]"> Dashboard</p>
         </Link>
-        <Link to="products/" className="btn btn-primary rounded-none text-xl">
-          Products
+        <Link
+          to="users/"
+          className="btn bg-slate-800 rounded-none  text-white border-none"
+        >
+          <p className="text-xl w-full text-justify pl-[50px]"> Users</p>
         </Link>
-        <Link to="products/" className="btn btn-primary rounded-none text-xl">
-          Logs
+        <Link
+          to="products/"
+          className="btn bg-slate-800 rounded-none text-white border-none"
+        >
+          <p className="text-xl w-full text-justify pl-[50px]"> Products</p>
         </Link>
-        <Link to="products/" className="btn btn-primary rounded-none text-xl">
-          Settings
+        <Link
+          to="history/"
+          className="btn bg-slate-800 rounded-none text-white border-none"
+        >
+          <p className="text-xl w-full text-justify pl-[50px]"> History</p>
+        </Link>
+        <Link
+          to="settings/"
+          className="btn bg-slate-800 rounded-none text-white border-none"
+        >
+          <p className="text-xl w-full text-justify pl-[50px]"> Settings</p>
         </Link>
         <button
-          className="btn btn-primary rounded-none text-xl"
+          className="btn bg-slate-800 rounded-none text-white border-none"
           onClick={handleLogout}
         >
-          Log out
+          <p className="text-xl w-full text-justify pl-[50px]"> Logout</p>
         </button>
       </div>
       <main className="w-[80vw] ml-16">

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useGetProductsQuery } from "./ProductApiSlice";
-import Product from "./Product";
+import { selectHistoryById, useGetHistoryQuery } from "./HistoryApiSlice";
+import History from "./History";
 import deleteIcon from "../../../../assets/trash-bin.png";
+import { useSelector } from "react-redux";
 
-const ProductList = () => {
+export default function HistoryList() {
   const [isSelectedAll, setIsSelectedAll] = useState(false);
 
   const handleSelectAll = () => {
@@ -11,12 +12,12 @@ const ProductList = () => {
   };
 
   const {
-    data: products,
+    data: histories,
     isLoading,
     isSuccess,
     isError,
     error,
-  } = useGetProductsQuery("productsList", {
+  } = useGetHistoryQuery("historyList", {
     pollingInterval: 6000,
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,
@@ -31,20 +32,20 @@ const ProductList = () => {
   }
 
   if (isSuccess) {
-    const { ids } = products;
+    const { ids } = histories;
 
     const tableContent = ids?.length
-      ? ids.map((productId) => (
-          <Product
-            key={productId}
-            productId={productId}
+      ? ids.map((historyId) => (
+          <History
+            key={historyId}
+            historyID={historyId}
             selected={isSelectedAll}
           />
         ))
       : null;
 
     content = (
-      <div className="overflow-x-auto bg-white p-10 min-h-[100vh]">
+      <div className="overflow-x-auto bg-white p-10 min-h-[100vh] mt-[128px]">
         {/* SEARCH */}
         <div className="flex items-center gap-1">
           <input
@@ -58,7 +59,7 @@ const ProductList = () => {
               role="button"
               className="btn bg-slate-800 text-green-400 m-1 w-full"
             >
-              All Categories
+              All Action
             </div>
             <ul
               tabIndex={0}
@@ -78,7 +79,7 @@ const ProductList = () => {
               role="button"
               className="btn bg-slate-800 text-green-400 m-1 w-full"
             >
-              All Products
+              All Actor
             </div>
             <ul
               tabIndex={0}
@@ -129,28 +130,32 @@ const ProductList = () => {
                   />
                 </label>
               </th>
+              <th className="text-black font-bold">Action</th>
+              <th className="text-black font-bold">Actor</th>
               <th className="text-black font-bold">Description</th>
-              <th className="text-black font-bold">Name</th>
-              <th className="text-black font-bold">Category</th>
-              <th className="text-black font-bold">Price</th>
+              <th className="text-black font-bold">Result</th>
+              <th className="text-black font-bold">Date</th>
+              <th className="text-black font-bold">Time</th>
             </tr>
           </thead>
           <tbody>{tableContent}</tbody>
+
           {/* foot */}
           <tfoot>
             <tr>
               <th></th>
+              <th className="text-black font-bold">Action</th>
+              <th className="text-black font-bold">Actor</th>
               <th className="text-black font-bold">Description</th>
-              <th className="text-black font-bold">Name</th>
-              <th className="text-black font-bold">Category</th>
-              <th className="text-black font-bold">Price</th>
+              <th className="text-black font-bold">Result</th>
+              <th className="text-black font-bold">Date</th>
+              <th className="text-black font-bold">Time</th>
             </tr>
           </tfoot>
         </table>
       </div>
     );
   }
-  return content;
-};
 
-export default ProductList;
+  return content;
+}
